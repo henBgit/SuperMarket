@@ -1,0 +1,39 @@
+import React from 'react'
+
+export default function FavoriteProds({Favorites,Add_To_Cart,AddOrRemoveFromFavorites}) {
+
+    const addTocartBtn =(pid)=>{
+        if(Add_To_Cart(pid)){
+            alert('prod added ');
+        }else{
+            alert('faliled to add');
+        }
+    }
+    const changeFavorite=(prod)=>{
+        if(AddOrRemoveFromFavorites(prod)){
+            alert('added or remove secceffuly');
+        }else{
+            alert('cannot add or remove this prod');
+        }
+    }
+
+  return (
+    <div>
+        Favorites Products:
+      {Favorites.map((prod, indexProd) => (
+        <div key={prod.Pid} className="product-card">
+          <p className="product-name">Name: {prod.Pname}</p>
+          <p className="product-price">Price: <strong>{prod.Price}</strong></p>
+          <p className="product-pid">Pid: {prod.Pid}</p>
+          <img src={prod.imgSrc} alt="" style={{height:100,width:100}} />
+        
+          <div className='btns'>
+            <button className="add-to-cart-button" onClick={() => addTocartBtn(prod.Pid)}>Add To Cart</button>
+            <button className="add-to-cart-button" onClick={() => changeFavorite(prod)}>Remove From Favorites</button>
+          </div>
+         
+        </div>
+      ))}
+    </div>
+  )
+}
